@@ -1,0 +1,26 @@
+---
+title: "Homes"
+author: "Ian Reid"
+date: "18/04/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### April 18, 2021
+
+```{r map, echo=FALSE,message=FALSE}
+library(leaflet)
+library(dplyr)
+library(htmltools)
+places <- data.frame(Placename = c("Elderslie", "Guelph", "Vancouver", "Riverside", "Saskatoon", "Dorval", "Pointe-Claire"),
+lat = c(44.310605,	43.531844,	49.26481,	33.981357,	52.124891,	45.446694,	45.445004),
+lng = c(-81.185082, -80.223875, -123.251016, -117.330579, -106.642271, -73.759371, -73.8131068),
+when = c("1948-1966", "1966-1969", "1969-1973", "1973-1975", "1975-1985", "1986-1992", "1992-2021"))
+
+places %>% leaflet() %>%   addTiles() %>%
+  addMarkers(popup = ~htmlEscape(when), clusterOptions = markerClusterOptions())
+```
+Places where I have lived
